@@ -1,12 +1,12 @@
 ![django image](https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Django_logo.svg/1200px-Django_logo.svg.png)
 
-#Internet Provider
+# Internet Provider
 
 The main purpose of the project is to provide an opportunity 
 to provide services on the website of the Internet provider 
 ***"Shvarc"***.
 
-##Project features
+## Project features
 
 1. A customer can register and login to the system.
 2. The customer can choose needed services(Wireless, Internet, TV) and a plan for each.
