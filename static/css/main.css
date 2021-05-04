@@ -1,0 +1,44 @@
+.copyright-footer {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+div .partner {
+    display: flex;
+    justify-content: center;
+}
+
+.value-col {
+    padding-left: 10rem;
+    text-align: left;
+}
+
+.edit-col {
+    padding-left: 50rem;
+}
+
+.partner-logo {
+    width: 150px;
+    height: 150px;
+}
+
+.top-box-text {
+    color: grey;
+}
+
+.low-box-text {
+    color: orange;
+}
+
+.title {
+    text-align: center;
+}
+
+.profile-title {
+    text-align: center;
+    font-size: 4.5em;
+}
+
+.profile-info {
+    font-size: 1.5em;
+}

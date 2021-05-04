@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Available Plans</h1>
+    <button type="button" class="btn btn-info mb-2">Filtering</button>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            {#            Use for loop here#}
+            <th scope="col"></th>
+            <th scope="col">Download speed</th>
+            <th scope="col">Price</th>
+            <th scope="col">Best for</th>
+            <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Plan name</th>
+            <td>4 mb</td>
+            <td>$100</td>
+            <td>Some silly text right here</td>
+            <td><a href="#">Check details</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Plan name</th>
+            <td>4 mb</td>
+            <td>$100</td>
+            <td>Some silly text right here</td>
+            <td><a href="#">Check details</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Plan name</th>
+            <td>4 mb</td>
+            <td>$100</td>
+            <td>Some silly text right here</td>
+            <td><a href="#">Check details</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Plan name</th>
+            <td>4 mb</td>
+            <td>$100</td>
+            <td>Some silly text right here</td>
+            <td><a href="#">Check details</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Plan name</th>
+            <td>4 mb</td>
+            <td>$100</td>
+            <td>Some silly text right here</td>
+            <td><a href="#">Check details</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Plan name</th>
+            <td>4 mb</td>
+            <td>$100</td>
+            <td>Some silly text right here</td>
+            <td><a href="#">Check details</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-info">Add plan</button>
+{% endblock %}
