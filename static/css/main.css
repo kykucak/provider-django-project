@@ -9,12 +9,17 @@ div .partner {
 }
 
 .value-col {
-    padding-left: 10rem;
+    padding-left: 15rem;
     text-align: left;
 }
 
 .edit-col {
-    padding-left: 50rem;
+    padding-left: 45rem;
+}
+
+.space-between-rows td{
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
 }
 
 .partner-logo {
@@ -36,7 +41,7 @@ div .partner {
 
 .profile-title {
     text-align: center;
-    font-size: 4.5em;
+    font-size: 3.2em;
 }
 
 .profile-info {

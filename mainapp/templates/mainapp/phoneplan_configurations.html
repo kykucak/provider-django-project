@@ -1,0 +1,34 @@
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Internet type</th>
+        <td>{{ plan.internet_type }}</td>
+    </tr>
+    <tr>
+        <th>Amount of data</th>
+        <th>{{ plan.data_amount }}</th>
+    </tr>
+    <tr>
+        <td>Minutes to other operators</td>
+        <td>{{ plan.minutes_out }}</td>
+    </tr>
+    <tr>
+        <td>Minutes abroad</td>
+        <td>not ready yet</td>
+    </tr>
+    <tr>
+        <td>Amount of sms</td>
+        <td>{{ plan.sms_amount }}</td>
+    </tr>
+    <tr>
+        <td>Connection only with passport</td>
+        <td>
+            {% if plan.connection_with_passport %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+        </td>
+    </tr>
+    </tbody>
+</table>

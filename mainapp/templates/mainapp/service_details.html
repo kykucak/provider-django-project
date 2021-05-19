@@ -7,57 +7,40 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            {#            Use for loop here#}
             <th scope="col"></th>
-            <th scope="col">Download speed</th>
+
+            <th scope="col">
+                {% if service.slug == 'internet' %}
+                    Download speed
+                {% elif service.slug == 'tv' %}
+                    Channels
+                {% elif service.slug == 'wireless' %}
+                    Amount of data
+                {% endif %}
+            </th>
             <th scope="col">Price</th>
             <th scope="col">Best for</th>
             <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">Plan name</th>
-            <td>4 mb</td>
-            <td>$100</td>
-            <td>Some silly text right here</td>
-            <td><a href="#">Check details</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Plan name</th>
-            <td>4 mb</td>
-            <td>$100</td>
-            <td>Some silly text right here</td>
-            <td><a href="#">Check details</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Plan name</th>
-            <td>4 mb</td>
-            <td>$100</td>
-            <td>Some silly text right here</td>
-            <td><a href="#">Check details</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Plan name</th>
-            <td>4 mb</td>
-            <td>$100</td>
-            <td>Some silly text right here</td>
-            <td><a href="#">Check details</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Plan name</th>
-            <td>4 mb</td>
-            <td>$100</td>
-            <td>Some silly text right here</td>
-            <td><a href="#">Check details</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Plan name</th>
-            <td>4 mb</td>
-            <td>$100</td>
-            <td>Some silly text right here</td>
-            <td><a href="#">Check details</a></td>
-        </tr>
+        {% for plan in service_plans %}
+            <tr>
+                <th scope="row">{{ plan.name }}</th>
+                <td>
+                    {% if service.slug == 'internet' %}
+                        {{ plan.speed }}
+                    {% elif service.slug == 'tv' %}
+                        {{ plan.channels_amount }}
+                    {% elif service.slug == 'wireless' %}
+                        {{ plan.data_amount }}
+                    {% endif %}
+                </td>
+                <td>${{ plan.price }}</td>
+                <td>Best for coming soon</td>
+                <td><a href="{{ plan.get_absolute_url }}">Check details</a></td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
     <button type="button" class="btn btn-info">Add plan</button>

@@ -1,0 +1,18 @@
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Amount of channels</th>
+        <th>{{ plan.channels_amount }}</th>
+    </tr>
+    <tr>
+        <th>Parent control</th>
+        <td>
+            {% if plan.parent_control_available %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+        </td>
+    </tr>
+    </tbody>
+</table>
