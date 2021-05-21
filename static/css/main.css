@@ -1,6 +1,6 @@
 .copyright-footer {
-  text-align: center;
-  margin: 2rem auto;
+    text-align: center;
+    margin: 2rem auto;
 }
 
 div .partner {
@@ -17,7 +17,7 @@ div .partner {
     padding-left: 45rem;
 }
 
-.space-between-rows td{
+.space-between-rows td {
     padding-top: 0.6em;
     padding-bottom: 0.6em;
 }
@@ -46,4 +46,37 @@ div .partner {
 
 .profile-info {
     font-size: 1.5em;
+}
+
+.filter-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-content a:hover {
+    background-color: #ddd;
+}
+
+.filter-menu:hover .menu-content {
+    display: block;
+}
+
+.filter-menu:hover .btn-menu {
+    background-color: #3e8e41;
 }

@@ -31,6 +31,12 @@ class Plan(models.Model):
     days_to_connect = models.IntegerField()
     description = models.TextField()
 
+    def get_absolute_url(self):
+        return get_plan_url(self, 'plan_details')
+
+    def get_order_page(self):
+        return get_plan_url(self, 'order_submission')
+
     def __str__(self):
         return self.name
 
@@ -38,9 +44,6 @@ class Plan(models.Model):
 class InternetPlan(Plan):
 
     speed = models.IntegerField()
-
-    def get_absolute_url(self):
-        return get_plan_url(self, 'plan_details')
 
 
 class TelephonePlan(Plan):
@@ -61,17 +64,11 @@ class TelephonePlan(Plan):
     sms_amount = models.IntegerField()
     connect_with_passport = models.BooleanField()
 
-    def get_absolute_url(self):
-        return get_plan_url(self, 'plan_details')
-
 
 class TVPlan(Plan):
 
     channels_amount = models.IntegerField()
     parent_control_available = models.BooleanField()
-
-    def get_absolute_url(self):
-        return get_plan_url(self, 'plan_details')
 
 
 class Customer(models.Model):

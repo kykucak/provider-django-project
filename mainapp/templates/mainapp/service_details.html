@@ -2,8 +2,17 @@
 
 {% block content %}
 
-    <h1>Available Plans</h1>
-    <button type="button" class="btn btn-info mb-2">Filtering</button>
+    <h1 class="test">Available Plans</h1>
+    <div class="filter-menu">
+        <button type="button" class="btn btn-info btn-menu mb-2">Filtering</button>
+        <div class="menu-content">
+            <a href="{% url 'service_details' slug=service.slug %}?filter=name">a-z</a>
+            <a href="{% url 'service_details' slug=service.slug %}?filter=-name">z-a</a>
+            <a href="{% url 'service_details' slug=service.slug %}?filter=price">from cheap to expensive</a>
+            <a href="{% url 'service_details' slug=service.slug %}?filter=-price">from expensive to cheap</a>
+        </div>
+    </div>
+
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -43,5 +52,4 @@
         {% endfor %}
         </tbody>
     </table>
-    <button type="button" class="btn btn-info">Add plan</button>
 {% endblock %}
