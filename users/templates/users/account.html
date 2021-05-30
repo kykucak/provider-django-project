@@ -3,13 +3,46 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-        <h1 class="mt-4">{{ user.first_name }} {{ user.last_name }}</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ u_form|crispy }}
-            <div class="pt-3">
-                <button class="btn btn-outline-info" type="submit">Update</button>
-            </div>
-        </form>
 
+    {% include 'messages.html' %}
+
+    <h1 class="mt-4">{{ user.first_name }} {{ user.last_name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ u_form|crispy }}
+        <div class="pt-3">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+    <h2>Your plans</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Plan name</th>
+            <th>Service</th>
+            <th>Price</th>
+            <th>Confirmed</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for plan in plans_list.related_plans_list.all %}
+            <tr>
+                <td>{{ plan.content_object.name }}</td>
+                <td>{{ plan.content_object.service.name }}</td>
+                <td>{{ plan.content_object.price }}</td>
+                <td>
+                    {% if plan.content_object.confirmed %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td><a href="{{ plan.content_object.get_absolute_url }}">Details</a></td>
+                <td><a href="{{ plan.get_cancel_url }}">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

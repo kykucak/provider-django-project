@@ -2,6 +2,7 @@ from django import forms
 
 
 class OrderSubmissionForm(forms.Form):
+    """Form for filling info about customer's details for order"""
 
     first_name = forms.CharField()
     last_name = forms.CharField()
@@ -9,4 +10,6 @@ class OrderSubmissionForm(forms.Form):
     phone = forms.CharField()
     city = forms.CharField()
     street = forms.CharField()
-    house = forms.CharField()
+    house_num = forms.IntegerField()
+    apartment_num = forms.IntegerField()
+

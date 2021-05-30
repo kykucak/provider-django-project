@@ -24,7 +24,14 @@
                 <h4 class="pt-3 ps-4 low-box-text">Total price</h4>
                 <h5 class="pt-2 ps-4 low-box-text">${{ plan.price }}/mo.</h5>
                 <div class="d-grid gap-2 col-6 mx-auto pt-4">
-                    <a href="{{ plan.get_order_page }}" class="btn btn-success">Order</a>
+                    {% if is_ordered %}
+                        <button class="btn btn-success">Already ordered</button>
+                    {% else %}
+                        <a href="{% if service_in_use %} {% url 'service_in_use_order' %}
+                                 {% elif not user.is_authenticated %} {% url 'anonym_order' %}
+                                 {% else %}{{ plan.get_order_page }} {% endif %}"
+                                class="btn btn-success">Order</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

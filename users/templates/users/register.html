@@ -4,12 +4,11 @@
 
 {% block content %}
 
-    <div class="container">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
-        </form>
-    </div>
+    {% include 'messages.html' %}
+
+    <form method="POST">
+        {{ form|crispy }}
+        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+    </form>
 
 {% endblock %}
