@@ -78,7 +78,7 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
+# Sphinx docs
 docs/_build/
 doc/_build/
 
@@ -133,7 +133,7 @@ pythonenv*
 # Rope project settings
 .ropeproject
 
-# mkdocs documentation
+# mkdocs docs
 /site
 
 # mypy

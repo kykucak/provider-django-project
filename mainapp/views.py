@@ -20,7 +20,7 @@ CT_MODEL__CLASS = {
 
 def fill_customer_after_order(customer, order_data):
     """
-
+    Fill passed customer's phone, city, street, house_num, apartment_num attributes with passed order_data
     :param customer:
     :param order_data:
     :return:
@@ -34,6 +34,7 @@ def fill_customer_after_order(customer, order_data):
 
 
 def admin_order_mail(admin_mail, order_data, plan_name):
+    """Sends notification order mail to 'admin_mail', with custom info passed to 'order_data' and 'plan_name'"""
     subject = 'New Order Shvarc'
     message = 'New order request was sent!\n' \
               f'Address: {order_data["city"]} {order_data["street"]} {order_data["house_num"]}\n' \
@@ -45,6 +46,9 @@ def admin_order_mail(admin_mail, order_data, plan_name):
 
 
 def customer_order_mail(order_data):
+    """
+    Sends notification order mail to email passed in order submission form, with custom info passed to 'order_data'
+    """
     subject = 'Order Plan in Shvarc'
     message = f'Hello, {order_data["first_name"]}.\n' \
               f'Your order wes sent to our manager and he will connect with you soon.\nGood day!'
@@ -53,6 +57,7 @@ def customer_order_mail(order_data):
 
 
 class BaseView(View):
+    """Renders main page of the project with best_plans in context data"""
 
     def get(self, request, *args, **kwargs):
         best_plans = [TVPlan.objects.first(), WirelessPlan.objects.first(), InternetPlan.objects.first()]
@@ -63,6 +68,7 @@ class BaseView(View):
 
 
 class ServiceDetailView(ServicePlansMixin, DetailView):
+    """Renders page with plans of the service, and filtering function, which works by passing filter argument in url"""
 
     def dispatch(self, request, *args, **kwargs):
         self.filter = request.GET.get('filter')
@@ -75,6 +81,11 @@ class ServiceDetailView(ServicePlansMixin, DetailView):
 
 
 class PlanDetailView(DetailView):
+    """
+    Renders page with plan details and "Order" button, which display 'Already ordered', if 'pla_is_ordered' is True,
+    if 'plan_in_use' is True, then redirects you to account page and ask to delete already ordered plan in that service,
+    if they both are False, user is redirected to order_submission view
+    """
 
     def dispatch(self, request, *args, **kwargs):
         self.model = CT_MODEL__CLASS[kwargs['ct_model']]
@@ -106,6 +117,15 @@ class PlanDetailView(DetailView):
 
 @login_required
 def order_submission(request, **kwargs):
+    """
+    Renders page with order form with pre-pasted first name, last name, and email from user info,
+    if form is valid, ordered_plan with is_confirmed=False is created and added to customer ordered plan list, then
+    user is redirected to home page with message about succeed mail sending
+    :param request:
+    :param kwargs:
+    :return:
+    """
+
     order_form = OrderSubmissionForm(
         initial={
             'first_name': request.user.first_name,
@@ -148,6 +168,11 @@ def order_submission(request, **kwargs):
 
 @login_required
 def ordered_plan_cancel(request, **kwargs):
+    """
+    Deletes an ordered plan by passed arguments in url
+    and redirects to account page with message, plan was successfully deleted
+    """
+
     ct_model, slug = kwargs['ct_model'], kwargs['slug']
     content_type = ContentType.objects.get(model=ct_model)
     plan = content_type.model_class().objects.get(slug=slug)

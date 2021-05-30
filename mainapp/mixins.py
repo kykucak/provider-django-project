@@ -11,6 +11,10 @@ SERVICE_SLUG2PLAN_MODEL = {
 
 
 class ServicePlansMixin(SingleObjectMixin):
+    """
+    Mixin for adding plans of a service to ServiceDetailView context data in order,
+    that was passed in 'filter' argument
+    """
 
     ALLOWED_PARAMS = ['name', '-name', 'price', '-price']
 

@@ -7,6 +7,10 @@ from mainapp.tests.test_views import create_service, create_net_plan
 
 
 def create_user_customer(user_data: dict) -> list:
+    """
+    Creates and returns a list of a user instance with passed in 'user_data' info and a customer with values, by default,
+    phone='test phone', city='test city', street='test street', house_num=13, apartment_num=18
+    """
     user = User.objects.create_user(
         username=user_data['username'],
         first_name=user_data.get('first_name', ''),
@@ -142,6 +146,7 @@ class AccountTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_update_with_valid_data(self):
+        """Tests, that user instance is updated with new values passed into UpdateUserForm"""
         self.client.login(**self.user_credentials)
 
         response = self.client.post(self.url, data=self.data_to_change)
@@ -151,6 +156,7 @@ class AccountTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_update_with_invalid_data(self):
+        """Tests, that user instance is not updated with new values passed into UpdateUserForm"""
         self.client.login(**self.user_credentials)
         invalid_data = {
             'password': 'mypassword1321'
