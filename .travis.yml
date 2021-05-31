@@ -3,6 +3,16 @@ python:
   - "3.9"
 services:
   - postgresql
+addons:
+  postgresql: "12.5"
+  apt:
+    packages:
+      - postgresql-12.5
+      - postgresql-client-12.5
+
+env:
+  - PGPORT=5432
+  - PGUSER=voha
 install:
   - pip install -r requirements.txt
 script:
@@ -16,3 +26,4 @@ deploy:
   - provider: heroku
     api_key: ad91dd46-4fa1-40cf-8c02-8afd228f809b
     app: provider-django-app
+
