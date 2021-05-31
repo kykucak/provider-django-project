@@ -18,10 +18,10 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  - sleep 15
+  - psql -c 'create database travis_ci_test;' -U voha
 script:
   - python manage.py test
-
+  - wait-for
 branches:
   only:
     - main
