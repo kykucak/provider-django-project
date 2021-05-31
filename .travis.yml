@@ -9,19 +9,26 @@ addons:
     packages:
       - postgresql-12
       - postgresql-client-12
+      - postgresql-server-dev-12
 
-env:
-  global:
-    - PGPORT=5432
-    - PGUSER=voha
+#env:
+#  global:
+#    - PGPORT=5432
+#    - PGUSER=voha
+before_install:
+  - sudo pg_dropcluster --stop 12 main
+  - sudo pg_upgradecluster 11 main
+  - sudo pg_ctlcluster 12 main restart
+  - sudo pg_dropcluster 11 main
+
 install:
   - pip install -r requirements.txt
 
 before_script:
-  - psql -c 'create database travis_ci_test;' -U voha
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - python manage.py test
-  - wait-for
+
 branches:
   only:
     - main
