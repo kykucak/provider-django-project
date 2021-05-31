@@ -7,3 +7,12 @@ install:
   - pip install -r requirements.txt
 script:
   - python manage.py test
+
+branches:
+  only:
+    - master
+
+deploy:
+  - provider: heroku
+    api_key: ad91dd46-4fa1-40cf-8c02-8afd228f809b
+    app: provider-django-app
