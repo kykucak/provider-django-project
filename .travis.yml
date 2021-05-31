@@ -4,15 +4,16 @@ python:
 services:
   - postgresql
 addons:
-  postgresql: "12.5"
+  postgresql: "12"
   apt:
     packages:
-      - postgresql-12.5
-      - postgresql-client-12.5
+      - postgresql-12
+      - postgresql-client-12
 
 env:
-  - PGPORT=5432
-  - PGUSER=voha
+  global:
+    - PGPORT=5432
+    - PGUSER=voha
 install:
   - pip install -r requirements.txt
 script:
