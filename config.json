@@ -1,7 +1,7 @@
 {
   "DB_NAME": "providerdb",
   "DB_USER": "voha",
-  "DB_PASSWORD_": "JWKhBr5OL3ER2F3xOBVB",
+  "DB_PASSWORD": "JWKhBr5OL3ER2F3xOBVB",
   "DB_HOST": "database-2.c0r6ehtjxuoq.eu-central-1.rds.amazonaws.com",
   "SECRET_KEY": "django-insecure-l+g+&fhh-m4r_t3or0zp_h-e3k@42)0ia_h#f-%6bvskw#voxr",
   "EMAIL_USER": "voha.shvarc@gmail.com",
