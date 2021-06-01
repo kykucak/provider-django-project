@@ -1,5 +1,5 @@
+getenv.sh
 
-#config.json
 ### Django ###
 *.log
 *.pot
