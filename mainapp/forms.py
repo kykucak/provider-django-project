@@ -4,6 +4,7 @@ from django import forms
 class OrderSubmissionForm(forms.Form):
     """Form for filling info about customer's details for order"""
 
+    plan = forms.CharField()
     first_name = forms.CharField()
     last_name = forms.CharField()
     email = forms.EmailField()

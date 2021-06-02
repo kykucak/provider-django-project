@@ -5,6 +5,8 @@ from django.urls import reverse
 from mainapp.models import Customer, OrderedPlansList, OrderedPlan
 from mainapp.tests.test_views import create_service, create_net_plan
 
+from ..views import register, account
+
 
 def create_user_customer(user_data: dict) -> list:
     """
@@ -12,11 +14,11 @@ def create_user_customer(user_data: dict) -> list:
     phone='test phone', city='test city', street='test street', house_num=13, apartment_num=18
     """
     user = User.objects.create_user(
-        username=user_data['username'],
+        username=user_data.get('username'),
         first_name=user_data.get('first_name', ''),
         last_name=user_data.get('last_name', ''),
         email=user_data.get('email', ''),
-        password=user_data['password']
+        password=user_data.get('password')
     )
     customer = Customer.objects.create(
         user=user,
@@ -52,6 +54,7 @@ class UserTestCase(TestCase):
     def test_GET(self):
         response = self.client.get(reverse('register'))
 
+        self.assertEqual(response.resolver_match.func, register)
         self.assertEqual(response.templates[0].name, 'users/register.html')
         self.assertEqual(response.status_code, 200)
 
@@ -62,15 +65,14 @@ class UserTestCase(TestCase):
         :return:
         """
         response = self.client.post(reverse('register'), data=self.user_credentials)
-        # User was created
+
         user = User.objects.filter(username=self.user_credentials['username']).first()
         self.assertIn(user, User.objects.all())
-        # Customer was created
+
         customer = Customer.objects.filter(user=user).first()
         self.assertIn(customer, Customer.objects.all())
-        # OrderedPlansList was created
+
         self.assertIn(OrderedPlansList.objects.filter(owner=customer).first(), OrderedPlansList.objects.all())
-        # User was redirected to a login page
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, '/login/')
 

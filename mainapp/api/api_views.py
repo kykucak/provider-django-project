@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from ..models import Service, InternetPlan, WirelessPlan, TVPlan, Customer
+from ..models import Service, InternetPlan, WirelessPlan, TVPlan
 from .serializers import ServiceSerializer, InternetPlanSerializer, WirelessPlanSerializer, TVPlanSerializer
 
 
@@ -27,8 +27,3 @@ class TvViewSet(viewsets.ModelViewSet):
     queryset = TVPlan.objects.all()
     serializer_class = TVPlanSerializer
 
-
-# class CustomerViewSet(viewsets.ModelViewSet):
-#
-#     queryset = Customer.objects.all()
-#     serializer_class = CustomerSerializer

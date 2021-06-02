@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm, UserUpdateForm
-from mainapp.models import Customer, OrderedPlansList
+from .user_services import create_customer__ordered_plan_list, get_ordered_plan_list
 
 
 @csrf_exempt
@@ -14,8 +13,7 @@ def register(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            new_customer = Customer.objects.create(user=User.objects.get(username=form.cleaned_data['username']))
-            OrderedPlansList.objects.create(owner=new_customer)
+            create_customer__ordered_plan_list(form.cleaned_data.get('username'))
             messages.add_message(request, messages.SUCCESS, 'Your account was successfully created!')
             return redirect('login')
     form = UserRegistrationForm()
@@ -35,11 +33,10 @@ def account(request):
             messages.add_message(request, messages.SUCCESS, 'Your account info was successfully updated!')
             return redirect('account')
 
-    customer = Customer.objects.get(user=request.user)
-    plans_list = OrderedPlansList.objects.filter(owner=customer).first()
+    plan_list = get_ordered_plan_list(request.user)
     context = {
         'u_form': u_form,
-        'plans_list': plans_list
+        'plans_list': plan_list
     }
 
     return render(request, 'users/account.html', context=context)

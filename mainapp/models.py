@@ -5,15 +5,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.auth.models import User
 
 
-def get_plan_url(obj, viewname):
-    """
-    Returns a url fot the view with two parameters(ct_model and slug of a plan)
-    :param obj:
-    :param viewname:
-    :return:
-    """
-    ct_model = obj.get_model_name()
-    return reverse(viewname, kwargs={'ct_model': ct_model, 'slug': obj.slug})
+def get_url_with_service_slug_plan_slug(viewname, s_slug, p_slug):
+    return reverse(viewname, kwargs={'s_slug': s_slug, 'p_slug': p_slug})
 
 
 class Service(models.Model):
@@ -37,15 +30,11 @@ class Plan(models.Model):
 
     def get_absolute_url(self):
         """Returns url for a details view of the plan"""
-        return get_plan_url(self, 'plan_details')
+        return get_url_with_service_slug_plan_slug('plan_details', self.service.slug, self.slug)
 
     def get_order_page(self):
         """Returns url for a view to order the plan"""
-        return get_plan_url(self, 'order_submission')
-
-    def get_model_name(self):
-        """Returns model name(ct_model) of the plan"""
-        return self.__class__._meta.model_name
+        return get_url_with_service_slug_plan_slug('order_submission', self.service.slug, self.slug)
 
     def __str__(self):
         return self.name
@@ -106,7 +95,9 @@ class OrderedPlan(models.Model):
 
     def get_cancel_url(self):
         """Returns url for a view that deletes the ordered plan"""
-        return get_plan_url(self.content_object, 'cancel_plan')
+        return get_url_with_service_slug_plan_slug(
+            'cancel_plan', self.content_object.service.slug, self.content_object.slug
+        )
 
     def __str__(self):
         return f'{self.content_object.name} from {self.related_list.id} cart'
